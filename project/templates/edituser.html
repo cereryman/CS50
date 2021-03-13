@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block main %}
+    <p class="font-weight-bold">Please enter new values.</p>
+    <form action="/edituser_{{ id }}" method="post">
+        {% if username %}
+            <p class="font-weight-normal">Username:</p>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="username" value='{{ username }}' type="text">
+            </div>
+        {% endif %}
+        <p class="font-weight-normal">E-mail Address:</p>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="email" value='{{ email }}' type="text">
+        </div>
+        {% if isadmin %}
+            <p class="font-weight-normal">Administrator:</p>
+            <div class="form-group">
+                <select class="form-control" name="is_admin">
+                        <option value="0" {% if is_admin == 0 %}selected="selected"{% endif %}>No</option>
+                        <option value="1" {% if is_admin == 1 %}selected="selected"{% endif %}>Yes</option>
+                </select>
+            </div>
+        {% endif %}
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a href="javascript:window.open('','_parent','');window.close();">Cancel</a>
+    </form>
+{% endblock %}

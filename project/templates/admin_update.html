@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View/Edit News
+{% endblock %}
+
+{% block menu %}
+  {% if isadmin %}
+    {% include 'adminmenu.html' %}
+  {% else %}
+    {% include 'usermenu.html' %}
+  {% endif %}
+{% endblock %}
+
+
+{% block main %}
+    <p class="font-weight-bold">Click the "Update" button to fetch the latest news.</p>
+    <form action="/admin_update" method="post">
+        <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+{% endblock %}

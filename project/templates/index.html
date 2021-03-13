@@ -1,0 +1,160 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block menu %}
+  {% if isadmin %}
+    {% include 'adminmenu.html' %}
+  {% else %}
+    {% include 'usermenu.html' %}
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+
+  <p class="h2">Top News for Today</p>
+  <table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 33.33%"><div class="p-3 mb-2 bg-primary text-white">News from the left</div></th>
+        <th scope="col" style="width: 33.33%"><div class="p-3 mb-2 bg-secondary text-white">News from the center</div></th>
+        <th scope="col" style="width: 33.33%"><div class="p-3 mb-2 bg-danger text-white">News from the right</div></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">
+          <table class="table table-sm">
+            <tbody>
+              {% for news_item in leftnews %}
+                <tr>
+                  <td>
+                    {% if news_item.imgurl %}
+                      <p class="h6 text-left">
+                        <a href={{ "view_" ~ news_item.id }}><img class="img-thumbnail img-fluid" src={{ news_item.imgurl }} width="200"></a>
+                      </p>
+                    {% else %}
+                      <p class="h6 text-left">
+                        <a href={{ "view_" ~ news_item.id }}><img class="img-thumbnail img-fluid" src=static/blank.png width="200"></a>
+                      </p>
+                    {% endif %}
+                    <p class="h6 text-left">
+                      <a href={{ "view_" ~ news_item.id }} class="text-dark">{{ news_item.headline }}</a>
+                    </p>
+                     <div class="form-group mb-0">
+                       <form action="/newslike_{{ news_item.id }}" method="post">
+                        <div class="form-group">
+                          <input autocomplete="off" autofocus class="form-control" name="source" value="index" type="hidden">
+                        </div>
+                          <p class="text-dark text-left">{{ news_item.likes }} Like(s)
+                            {% if session.user_id %}
+                              <button class="btn btn-link d-inline" type="submit">
+                                {% if news_item.id in likes %}
+                                  (Liked)
+                                {% else %}
+                                  (Like)
+                                {% endif %}
+                              </button>
+                            {% endif %}
+                            | <a href={{ "view_" ~ news_item.id ~ "#comments" }}>{{ news_item.commentsnb }} Comment(s)</a>
+                          </p>
+                      </form>
+                     </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </th>
+        <th scope="row">
+          <table class="table table-sm">
+            <tbody>
+              {% for news_item in centernews %}
+                <tr>
+                  <td>
+                    {% if news_item.imgurl %}
+                      <p class="h6 text-left">
+                        <a href={{ "view_" ~ news_item.id }}><img class="img-thumbnail img-fluid" src={{ news_item.imgurl }} width="200"></a>
+                      </p>
+                    {% else %}
+                      <p class="h6 text-left">
+                        <a href={{ "view_" ~ news_item.id }}><img class="img-thumbnail img-fluid" src=static/blank.png width="200"></a>
+                      </p>
+                    {% endif %}
+                    <p class="h6 text-left">
+                      <a href={{ "view_" ~ news_item.id }} class="text-dark">{{ news_item.headline }}</a>
+                    </p>
+                     <div class="form-group mb-0">
+                       <form action="/newslike_{{ news_item.id }}" method="post">
+                        <div class="form-group">
+                          <input autocomplete="off" autofocus class="form-control" name="source" value="index" type="hidden">
+                        </div>
+                          <p class="text-dark text-left">{{ news_item.likes }} Like(s)
+                            {% if session.user_id %}
+                              <button class="btn btn-link d-inline" type="submit">
+                                {% if news_item.id in likes %}
+                                  (Liked)
+                                {% else %}
+                                  (Like)
+                                {% endif %}
+                              </button>
+                            {% endif %}
+                            | <a href={{ "view_" ~ news_item.id ~ "#comments" }}>{{ news_item.commentsnb }} Comment(s)</a>
+                          </p>
+                      </form>
+                     </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </th>
+        <th scope="row">
+          <table class="table table-sm">
+            <tbody>
+              {% for news_item in rightnews %}
+                <tr>
+                  <td>
+                    {% if news_item.imgurl %}
+                      <p class="h6 text-left">
+                        <a href={{ "view_" ~ news_item.id }}><img class="img-thumbnail img-fluid" src={{ news_item.imgurl }} width="200"></a>
+                      </p>
+                    {% else %}
+                      <p class="h6 text-left">
+                        <a href={{ "view_" ~ news_item.id }}><img class="img-thumbnail img-fluid" src=static/blank.png width="200"></a>
+                      </p>
+                    {% endif %}
+                    <p class="h6 text-left">
+                      <a href={{ "view_" ~ news_item.id }} class="text-dark">{{ news_item.headline }}</a>
+                    </p>
+                     <div class="form-group mb-0">
+                       <form action="/newslike_{{ news_item.id }}" method="post">
+                        <div class="form-group">
+                          <input autocomplete="off" autofocus class="form-control" name="source" value="index" type="hidden">
+                        </div>
+                          <p class="text-dark text-left">{{ news_item.likes }} Like(s)
+                            {% if session.user_id %}
+                              <button class="btn btn-link d-inline" type="submit">
+                                {% if news_item.id in likes %}
+                                  (Liked)
+                                {% else %}
+                                  (Like)
+                                {% endif %}
+                              </button>
+                            {% endif %}
+                            | <a href={{ "view_" ~ news_item.id ~ "#comments" }}>{{ news_item.commentsnb }} Comment(s)</a>
+                          </p>
+                      </form>
+                     </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

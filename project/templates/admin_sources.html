@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View/Edit Sources
+{% endblock %}
+
+{% block menu %}
+  {% if isadmin %}
+    {% include 'adminmenu.html' %}
+  {% else %}
+    {% include 'usermenu.html' %}
+  {% endif %}
+{% endblock %}
+
+
+{% block main %}
+    <p class="text-right"><a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="MyWindow=window.open('addsource','MyWindow','width=600,height=800'); return false;">Add</a></p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">URL</th>
+                <th scope="col">Bias</th>
+                <th scope="col">Disabled</th>
+                <th scope="col" colspan="2">Options</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row.name }}</div></td>
+                    <td><a href=http://www.{{ row.url }} title={{ row.url }} target="_blank">{{ row.url }}</a></td>
+                    <td>{{ row.bias }}</div></td>
+                    {% if row.disabled %}
+                        <td><div class="text-danger">Yes</div></td>
+                    {% else %}
+                        <td>No</td>
+                    {% endif %}
+                    <td><a href="#" onclick="MyWindow=window.open('{{ "editsource_" ~ row.id }}','MyWindow','width=600,height=800'); return false;">Edit</a></td>
+                    <td><a href="#" onclick="MyWindow=window.open('{{ "deletesource_" ~ row.id }}','MyWindow','width=600,height=300'); return false;">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+{% endblock %}

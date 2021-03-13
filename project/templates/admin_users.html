@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View/Edit Users
+{% endblock %}
+
+{% block menu %}
+  {% if isadmin %}
+    {% include 'adminmenu.html' %}
+  {% else %}
+    {% include 'usermenu.html' %}
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">E-mail Address</th>
+                <th scope="col">Administrator</th>
+                <th scope="col" colspan="2">Options</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row.username }}</div></td>
+                    <td><a href=mailto:{{ row.email }} title={{ row.email }} target="_blank">{{ row.email }}</a></td>
+                    {% if row.is_admin %}
+                        <td><div class="text-danger">Yes</div></td>
+                    {% else %}
+                        <td>No</td>
+                    {% endif %}
+                    <td><a href="#" onclick="MyWindow=window.open('{{ "edituser_" ~ row.id }}','MyWindow','width=600,height=800'); return false;">Edit</a></td>
+                    {% if isadmin == 1 %}
+                    <td><a href="#" onclick="MyWindow=window.open('{{ "deleteuser_" ~ row.id }}','MyWindow','width=600,height=300'); return false;">Delete</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+{% endblock %}

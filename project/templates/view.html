@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ news_item.headline }}
+{% endblock %}
+
+{% block menu %}
+  {% if isadmin %}
+    {% include 'adminmenu.html' %}
+  {% else %}
+    {% include 'usermenu.html' %}
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+  {% if news_item.imgurl %}
+    <p class="text-left"><a href={{ news_item.url }} target="_blank"><img src={{ news_item.imgurl }} width="500"></a></p>
+  {% endif %}
+  <p class="h4 text-left"><a href={{ news_item.url }} target="_blank" class="text-dark">{{ news_item.headline }}</a></p>
+  {% if news_item.author %}
+    <p class="h6 text-left">Author: {{ news_item.author }} | <a href=http://www.{{ news_item.sourceurl }} target="_blank" class="text-dark">{{ news_item.name }}</a></p>
+  {% else %}
+    <p class="h6 text-left"><a href=http://www.{{ news_item.sourceurl }} target="_blank" class="text-dark">{{ news_item.name }}</a></p>
+  {% endif %}
+  {% if news_item.publishedat %}
+  <p class="small text-left">{{ news_item.publishedat }}</p>
+  {% endif %}
+  <p></p>
+  <p class="text-left">{{ news_item.content }}</p>
+  <p class="text-dark text-left">
+    <form action="/newslike_{{ news_item.id }}" method="post">
+      <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="source" value={{ news_item.id }} type="hidden">
+      </div>
+      <p class="text-dark text-right d-inline">{{ news_item.likes }} Like(s)
+        {% if session.user_id %}
+          <button class="btn btn-link d-inline" type="submit">
+            {% if news_item.id in likes %}
+              (Liked)
+            {% else %}
+              (Like)
+            {% endif %}
+          </button>
+        {% else %}
+          <p> Log in to like this news item.</p>
+        {% endif %}
+      </p>
+    </form>
+  </p>
+  <p></p>
+  <a id="comments">
+  <p>{{ comments_nb }} Comment(s):</p>
+  {% for comment in comments %}
+    <p class="h4">User {{ comment.username }} commented</p>
+    <p class="small">On {{ comment.date }}</p>
+    <p>{{ comment.comment }}</p>
+
+  {% endfor %}
+
+  {% if session.user_id %}
+    <p>Post a comment:</p>
+      <form action="/postcomment_{{ news_item.id }}" method="post">
+    <div class="form-group">
+      <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+    </div>
+          <button class="btn btn-primary" type="submit">Post</button>
+        </p>
+      </form>
+  {% else %}
+    <p> Log in to post a comment.</p>
+  {% endif %}
+{% endblock %}

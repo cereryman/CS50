@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete
+{% endblock %}
+
+{% block main %}
+    <p class="font-weight-bold">Are you sure you want to delete source: {{ name }}?</p>
+    <form action="/deletesource_{{ id }}" method="post">
+        <button class="btn btn-primary" type="submit" onclick="closeSelf();">Confirm</button>
+        <a href="javascript:window.open('','_parent','');window.close();">Cancel</a>
+    </form>
+{% endblock %}
+

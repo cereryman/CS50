@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block main %}
+    <p class="font-weight-bold">Please enter new values.</p>
+    <form action="/editsource_{{ id }}" method="post">
+        <p class="font-weight-normal">Name:</p>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="name" value='{{ name }}' type="text">
+        </div>
+        <p class="font-weight-normal">URL:</p>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="url" value='{{ url }}' type="text">
+        </div>
+        <p class="font-weight-normal">Bias:</p>
+        <div class="form-group">
+            <select class="form-control" name="bias">
+                    <option value="" {% if not bias %}selected="selected"{% endif %}>Unknown</option>
+                    <option value="left" {% if bias == "left" %}selected="selected"{% endif %}>Left</option>
+                    <option value="center" {% if bias == "center" %}selected="selected"{% endif %}>Center</option>
+                    <option value="right" {% if bias == "right" %}selected="selected"{% endif %}>Right</option>
+            </select>
+        </div>
+        <p class="font-weight-normal">Disable:</p>
+        <div class="form-group">
+            <select class="form-control" name="disabled">
+                    <option value="0" {% if disabled == 0 %}selected="selected"{% endif %}>No</option>
+                    <option value="1" {% if disabled == 1 %}selected="selected"{% endif %}>Yes</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a href="javascript:window.open('','_parent','');window.close();">Cancel</a>
+    </form>
+{% endblock %}
