@@ -1,7 +1,5 @@
 CS50: Final project
 CS50 News Aggregator
-Jordan Lafrenière
-Nagoya, Japan
 
 About:
 - A Basic news aggregator which separates the news based on "left wing" to "right wing" bias.
