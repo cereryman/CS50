@@ -1,0 +1,44 @@
+   html,body{
+      margin:0;
+      padding:0;
+      width:100%;
+      height:100%;
+      border:none
+   }
+
+table.main_table {
+    width: 100%;
+    height: 100%;
+    border:none
+    padding: 7px 10px;
+    background-color: none;
+}
+
+td.sidebar {
+    vertical-align: top;
+    background-color: LightGray;
+}
+
+td.header {
+    text-align: center;
+    background-color: LightGray;
+    height: 100px;
+}
+
+td.main {
+    padding: 7px 10px;
+    vertical-align: top;
+}
+
+table.disc {
+  border: 1px solid black;
+  background-color: none;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  padding: 2px 3px;
+}
+table.disc td{
+  border: 1px solid black;
+  padding: 2px 3px;
+}

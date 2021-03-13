@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Rick Astley Fanpage - Home</title>
+        <script>
+            function greet()
+            {
+                let main_text = document.querySelector('#main_text');
+                let name = document.querySelector("#name").value;
+                if (name === "")
+                {
+                    name = "Rick Astley Fan";
+                }
+                document.querySelector("#result").innerHTML = "Hello, " + name + "!";
+            }
+        </script>
+    </head>
+    <body>
+        <table class="main_table">
+            <tr>
+                <td class="header" colspan="2">
+                    <h1 class="display-3">
+                        The #1 Rick Astley Fan Page
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+               <td class="sidebar" style="width:250px;">
+                     <nav class="nav flex-column">
+                         <a class="nav-link disabled" href="index.html">Home</a>
+                         <a class="nav-link" href="biography.html">Biography</a>
+                         <a class="nav-link" href="discography.html">Dicography</a>
+                         <a class="nav-link" href="links.html">Links</a>
+                     </nav>
+                </td>
+                <td class="main">
+                    <h2>Home</h2>
+                    <div id="question">
+                        Please enter your name:
+                        <form onsubmit="greet(); return false;">
+                            <input type="text" id="name">
+                            <input type="submit" onclick="document.getElementById('main_text').style.display = 'block'; document.getElementById('question').style.display = 'none';">
+                        </form>
+                    </div>
+                    <div id="result">
+                    </div>
+                    <div id="main_text" style="display: none">
+                        <p>Welcome to the world's greatest website, dedicated to the world's greatest artist: Rick Astley.</p>
+                        <h2>What makes Rick so good?</h2>
+                        <p>Well, it's hard to say...<br> His dancing, his signing? The fact that his two greatest hits (<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" title="Youtube: Never Gonna Give You Up">Never Gonna Give You Up</a> and <a href="https://www.youtube.com/watch?v=yPYZpwSpKmA" target="_blank" title="Youtube: Together Forever">Together Forever</a>)
+                         sound exactly the same? After all it takes talent to create such magic two times in a row.</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
